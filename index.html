@@ -73,7 +73,10 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
   background-image:repeating-linear-gradient(transparent 0 28px,color-mix(in srgb,var(--soft) 12%,transparent) 28px 29px)}
 .letter::before{content:"";position:absolute;left:50%;top:-12px;width:90px;height:22px;transform:translateX(-50%);background:var(--sage);opacity:.8}
 .letter p{margin:0 0 1em;white-space:pre-wrap}
-.sleepcat{position:absolute;right:-4px;bottom:-6px;width:130px}
+.sleepcat{all:unset;cursor:pointer;position:absolute;right:-4px;bottom:-6px;width:130px}
+.sleepcat:focus-visible{outline:2px solid var(--sage-d);outline-offset:4px;border-radius:12px}
+.sleepcat:hover{transform:scale(1.06)}
+.psst{position:absolute;right:6px;bottom:-26px;font-family:var(--display);font-size:.95rem;color:var(--soft);animation:sway 3s ease-in-out infinite}
 /* FOR YOU */
 .fy{display:grid;gap:22px;padding-top:14px}
 .fy h2{font-size:2.3rem}
@@ -306,7 +309,7 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
         </div>
         <div class="letterwrap">
           <div class="letter" id="letter" aria-live="polite"></div>
-          <div class="sleepcat" data-cat="sleep"></div>
+          <button class="sleepcat" id="egg" data-cat="sleep" aria-label="Wake up the sleepy cat"></button><span class="psst">psst… tap the sleepy cat</span>
         </div>
       </div>
     </section>
@@ -401,7 +404,7 @@ var C={
   pop2:{t:'',p:'You make the world brighter just by being in it.',b:'Okey ♡',cat:'wink'},
   pop3:{t:'',p:"You're loved, never forget that.",b:'Got it ♡',cat:'heart'},
   photos:[['media/m1.jpg',-5,'30% 30%'],['media/m2.jpg',4],['media/m3.jpg',-3],['media/m4.mp4',5]],
-  letter:["I may not always have the right words for it, but I hope ki you know how much you mean to me. I genuinely love hanging out with you and even the most random, ordinary days feel way better just because you are around.",
+  letter:["I may not always have the right words for it, but I hope ki you know how much you mean to me. I genuinely love hanging out with you and even the most random, ordinary days feel way better just because you are around. And jab bhi aap upset, bas ek call away, always there to cheer you up.",
           "Happy birthdayyyy. I hope this year brings you good days, great memories, and all the things you've been hoping for. I'm always in your corner, rooting for you and looking out for you in my own quiet ways."],
   checks:['I am Realllly sorry siddhi pehle ke liye','Me shi mein always want you around and am always by you corner','and keep telling all the things that hppens','happy birthdayyy','SiDdHiIii'],
   end:"May your year be filled with more happiness, success, and all the things you love."
@@ -535,6 +538,7 @@ document.querySelectorAll('.candle').forEach(function(c){c.onclick=function(e){i
   if(lit===0){document.getElementById('wishhint').textContent='Your wish is on its way ✦';setTimeout(function(){burst(innerWidth/2,innerHeight/2,160);rain(6000)},400)}}});
 var _show=show;show=function(id){_show(id);if(id==='end'){lit=3;document.querySelectorAll('.candle').forEach(function(c){c.classList.remove('out')});document.getElementById('wishhint').textContent='Make a wish, then tap the candles to blow them out.'}};
 document.querySelectorAll('.dish').forEach(function(d){d.onclick=function(e){d.classList.remove('yum');void d.offsetWidth;d.classList.add('yum');burst(e.clientX,e.clientY,20)}});
+document.getElementById('egg').onclick=function(){popup({t:'',p:'tu merese gussa to nhi na? 🥺',b:'nahi ♡',cat:'heart'},function(){burst(innerWidth/2,innerHeight/2,60)})};
 show('home');
 </script>
 
