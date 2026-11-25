@@ -101,6 +101,7 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
 .card h3{font-family:var(--display);font-size:1.7rem;margin:0 0 10px;line-height:1.1}
 .card p{margin:0 0 6px;line-height:1.5;color:var(--soft)}
 .card .cat{width:130px;margin:8px auto 14px}
+.card.note-only p{font-family:var(--display);font-size:1.6rem;color:var(--ink);line-height:1.2;text-wrap:balance}
 .x{all:unset;cursor:pointer;position:absolute;right:16px;top:12px;font-size:1.5rem;line-height:1}
 .themebtn{all:unset;cursor:pointer;position:fixed;left:max(10px,env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));font-size:.75rem;color:var(--soft);background:var(--paper);padding:5px 10px;border-radius:99px;box-shadow:0 1px 4px var(--shadow);z-index:5}
 @media(min-width:760px){
@@ -453,9 +454,9 @@ document.getElementById('nav').addEventListener('click',function(e){var b=e.targ
 /* ---- popups ---- */
 var scrim=document.getElementById('scrim'),card=document.getElementById('card'),after=null;
 function popup(d,next){
-  card.innerHTML='<button class="x" aria-label="Close">×</button>'+(d.t?'<h3></h3>':'')+cat(d.cat)+'<p></p><button class="btn" style="margin-top:10px">'+d.b+'</button>';
+  card.innerHTML='<button class="x" aria-label="Close">×</button>'+(d.t?'<h3></h3>':'')+cat(d.cat)+'<p></p>'+(d.b?'<button class="btn" style="margin-top:10px">'+d.b+'</button>':'');
   if(d.t)card.querySelector('h3').textContent=d.t; card.querySelector('p').textContent=d.p;
-  after=next;scrim.classList.add('on');burst(innerWidth/2,innerHeight/2,70);card.querySelector('.btn').focus();
+  after=next;scrim.classList.add('on');burst(innerWidth/2,innerHeight/2,70);card.querySelector('.btn,.x').focus();if(!d.b)card.classList.add('note-only');else card.classList.remove('note-only');
 }
 function closePop(){scrim.classList.remove('on');var f=after;after=null;if(f)f()}
 card.addEventListener('click',function(e){if(e.target.closest('.btn,.x'))closePop()});
@@ -538,7 +539,7 @@ document.querySelectorAll('.candle').forEach(function(c){c.onclick=function(e){i
   if(lit===0){document.getElementById('wishhint').textContent='Your wish is on its way ✦';setTimeout(function(){burst(innerWidth/2,innerHeight/2,160);rain(6000)},400)}}});
 var _show=show;show=function(id){_show(id);if(id==='end'){lit=3;document.querySelectorAll('.candle').forEach(function(c){c.classList.remove('out')});document.getElementById('wishhint').textContent='Make a wish, then tap the candles to blow them out.'}};
 document.querySelectorAll('.dish').forEach(function(d){d.onclick=function(e){d.classList.remove('yum');void d.offsetWidth;d.classList.add('yum');burst(e.clientX,e.clientY,20)}});
-document.getElementById('egg').onclick=function(){popup({t:'',p:'tu merese gussa to nhi na? 🥺',b:'nahi ♡',cat:'heart'},function(){burst(innerWidth/2,innerHeight/2,60)})};
+document.getElementById('egg').onclick=function(){popup({t:'',p:'tu merese gussa to nhi na',b:'',cat:'heart'},null)};
 show('home');
 </script>
 
