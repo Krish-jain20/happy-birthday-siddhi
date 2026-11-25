@@ -174,8 +174,8 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 #home .homecat{margin-top:18px}
 /* ===== v3: flip deck ===== */
-.deck{display:grid;grid-template-columns:1fr 1fr;gap:16px;perspective:1000px;padding:8px 4px}
-.flip{all:unset;cursor:pointer;display:block;aspect-ratio:3/3.6;position:relative;opacity:0;transform:translate(var(--fx,0),-120px) rotate(-30deg) scale(.6);transition:transform .8s cubic-bezier(.2,1.3,.4,1),opacity .4s}
+.deck{display:grid;grid-template-columns:1fr 1fr;gap:14px;perspective:1000px;padding:10px 14px}
+.flip{all:unset;cursor:pointer;display:block;min-width:0;aspect-ratio:3/3.6;position:relative;opacity:0;transform:translate(var(--fx,0),-120px) rotate(-30deg) scale(.6);transition:transform .8s cubic-bezier(.2,1.3,.4,1),opacity .4s}
 .flip:nth-child(1){--rot:-6deg}.flip:nth-child(2){--rot:5deg;margin-top:22px}.flip:nth-child(3){--rot:4deg}.flip:nth-child(4){--rot:-5deg;margin-top:22px}
 .flip:nth-child(5){--rot:-2deg;grid-column:1/-1;width:56%;justify-self:center;aspect-ratio:3/3}
 .flip.dealt{opacity:1;transform:rotate(var(--rot))}
@@ -249,7 +249,7 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
 @keyframes rock{0%,100%{transform:rotate(0)}50%{transform:rotate(-4deg) translateY(-3px)}}
 .dish.yum{animation:yum .6s cubic-bezier(.2,1.6,.4,1)}
 @keyframes yum{0%{transform:scale(1)}40%{transform:scale(1.18) rotate(-4deg)}100%{transform:scale(1)}}
-.flip.long .face.front span{font-size:1.05rem}
+.flip.long .face.front span{font-size:1.05rem}.flip.xlong .face.front span{font-size:.92rem;line-height:1.2}
 @media(prefers-reduced-motion:reduce){#sky,#fx{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -274,7 +274,7 @@ h1,h2{font-family:var(--display);font-weight:700;margin:0;letter-spacing:.04em;t
           <span class="pic" id="herPic"><img alt="The birthday girl" src="media/cover.jpg"></span>
           <span class="tag">birthday girl ♡</span>
         </button>
-        <h1><span><span class="wave">Happy Birthday!</span><svg class="scribble" style="left:-18px" width="18" height="28" viewBox="0 0 18 28"><path d="M2 2l12 10M2 12l10 6" fill="none"/></svg><svg class="scribble" style="right:-18px;top:0" width="18" height="28" viewBox="0 0 18 28"><path d="M16 4L4 12M16 14L6 18" fill="none"/></svg></span></h1>
+        <h1><span><span class="wave">Happy Birthday Siddhi!</span><svg class="scribble" style="left:-18px" width="18" height="28" viewBox="0 0 18 28"><path d="M2 2l12 10M2 12l10 6" fill="none"/></svg><svg class="scribble" style="right:-18px;top:0" width="18" height="28" viewBox="0 0 18 28"><path d="M16 4L4 12M16 14L6 18" fill="none"/></svg></span></h1>
         <p class="sub rise" style="--d:3">Another year, same you and you're still so special.</p>
         <button class="btn rise" style="--d:4" id="go1">Click to continue →</button>
         <div class="note">You're doing great &lt;3</div>
@@ -401,9 +401,9 @@ var C={
   pop2:{t:'',p:'You make the world brighter just by being in it.',b:'Okey ♡',cat:'wink'},
   pop3:{t:'',p:"You're loved, never forget that.",b:'Got it ♡',cat:'heart'},
   photos:[['media/m1.jpg',-5,'30% 30%'],['media/m2.jpg',4],['media/m3.jpg',-3],['media/m4.mp4',5]],
-  letter:["I may not always have the right words for it, but I hope you know how much you mean to me. I genuinely love hanging out with you—even the most random, ordinary days feel way better just because you're around.",
-          "Happy birthday. I hope this year brings you good days, great memories, and all the things you've been hoping for. I'm always in your corner, rooting for you and looking out for you in my own quiet ways."],
-  checks:['I am Realllly sorry siddhi pehle ke liye','I always want to be with you','I will always want to share everything that happens','happy birthdayyy','siddhiii'],
+  letter:["I may not always have the right words for it, but I hope ki you know how much you mean to me. I genuinely love hanging out with you and even the most random, ordinary days feel way better just because you are around.",
+          "Happy birthdayyyy. I hope this year brings you good days, great memories, and all the things you've been hoping for. I'm always in your corner, rooting for you and looking out for you in my own quiet ways."],
+  checks:['I am Realllly sorry siddhi pehle ke liye','Me shi mein always want you around and am always by you corner','and keep telling all the things that hppens','happy birthdayyy','SiDdHiIii'],
   end:"May your year be filled with more happiness, success, and all the things you love."
 };
 /* ---- cat drawings ---- */
@@ -435,7 +435,7 @@ C.photos.forEach(function(p,i){
 var checks=document.getElementById('checks');/*deck*/
 C.checks.forEach(function(t,i){var b=document.createElement('button');b.className='flip';b.style.setProperty('--i',i);
   b.innerHTML='<span class="in"><span class="face back"><b>♡</b><small>tap me</small></span><span class="face front"><em>'+String(i+1).padStart(2,'0')+'</em><span></span></span></span>';
-  b.querySelector('.front span').textContent=t;if(t.length>24)b.classList.add('long');b.onclick=function(e){b.classList.toggle('open');if(b.classList.contains('open'))burst(e.clientX,e.clientY,16)};checks.appendChild(b)});
+  b.querySelector('.front span').textContent=t;if(t.length>24)b.classList.add('long');if(t.length>44)b.classList.add('xlong');b.onclick=function(e){b.classList.toggle('open');if(b.classList.contains('open'))burst(e.clientX,e.clientY,16)};checks.appendChild(b)});
 document.getElementById('endtext').textContent=C.end;
 /* ---- navigation ---- */
 var order=['home','memories','messages','foryou','end'];
